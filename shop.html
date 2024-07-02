@@ -28,7 +28,7 @@
         <a href="home.html" class="logo"><i class="ri-bubble-chart-fill"></i>Rooz</a>
 
         <form action="#" class="search-form">
-            <input type="search" placeholder="search here..." id="search-box">
+            <input type="search" placeholder="search here..." id="search-box" onkeyup="search()">
             <label for="search-box" class="ri-search-line"></label>
         </form>
         <div class="icons">
@@ -57,74 +57,55 @@
 
 
     <!-- shopping cart start  -->
+
     <div class="shopping-cart">
+        <h3 class="total">Your Cart</h3>
         <div class="box">
-            <i class="ri-close-line close-icon"></i>
-            <img src="image/cart-img-1.png" alt="">
-            <div class="content">
-                <h3>Spicy</h3>
-                <span class="quantity">1</span>
-                <span class="multiply">x</span>
-                <span class="price">$140.00</span>
+            <div class="content" id="shopping-cart" style="display: inline-block;">
+                <h3 id="item-name"></h3>
+                <span class="price" id="item-price"></span>
             </div>
         </div>
-
-        <div class="box">
-            <i class="ri-close-line close-icon"></i>
-            <img src="image/cart-img-2.png" alt="">
-            <div class="content">
-                <h3>Rosemary</h3>
-                <span class="quantity">1</span>
-                <span class="multiply">x</span>
-                <span class="price">$160.00</span>
-            </div>
-        </div>
-
-        <div class="box">
-            <i class="ri-close-line close-icon"></i>
-            <img src="image/cart-img-3.png" alt="">
-            <div class="content">
-                <h3>Citrusy Fragrances</h3>
-                <span class="quantity">1</span>
-                <span class="multiply">x</span>
-                <span class="price">$210.00</span>
-            </div>
-        </div>
-
-        <div class="box">
-            <i class="ri-close-line close-icon"></i>
-            <img src="image/cart-img-4.png" alt="">
-            <div class="content">
-                <h3>Attar Fragrance</h3>
-                <span class="quantity">1</span>
-                <span class="multiply">x</span>
-                <span class="price">$250.00</span>
-            </div>
-        </div>
-
-        <h3 class="total">Total : <span>$760.00</span></h3>
-        <a href="#" class="btn">checkout</a>
+    
+        <h3 class="total">Total: $<span id="total-price"></span></h3>
+        <a href="#" class="btn checkout" onclick="checkout()">Checkout</a>
     </div>
     <!-- shopping cart end  -->
 
 
     <!-- login form start  -->
-    <div class="login-form">
-        <form action="#">
+    <div class="login-form form" id="loginClicked">
+        <form action="login.php" method="post">
             <h3>LOGIN FORM</h3>
-            <input type="email" placeholder="enter your email" class="box">
-            <input type="password" placeholder="enter your password" class="box">
+            <input type="email" name="email" placeholder="enter your email" class="box" required>
+            <input type="password" name="password" placeholder="enter your password" class="box" required>
             <div class="remember">
-                <input type="checkbox" name="" id="remeber-me">
-                <label for="remeber-me">remember me</label>
+                <input type="checkbox" name="" id="remember-me">
+                <label for="remember-me">remember me</label>
             </div>
             <input type="submit" value="Login Now" class="btn">
             <p>Forget password? <a href="#">click here</a></p>
-            <p>don't have an account? <a href="#">create now</a></p>
+            <p>don't have an account? <a href="#regClicked">create now</a></p>
         </form>
-
     </div>
-    <!-- login form end  -->
+    <!-- login form end -->
+
+    <!-- Registration form start  -->
+    <div class="reg-form form" id="regClicked">
+        <form action="reg.php" method="post">
+            <h3>Registration FORM</h3>
+            <input type="text" name="name" placeholder="Enter your Name" class="box" required>
+            <input type="email" name="email" placeholder="enter your email" class="box" required>
+            <input type="password" name="password" placeholder="enter your password" class="box" required>
+            <div class="remember">
+                <input type="checkbox" name="" id="remember-me">
+                <label for="remember-me">remember me</label>
+            </div>
+            <input type="submit" value="Submit" class="btn">
+            <p>Already have an account? <a href="#loginClicked">login now</a></p>
+        </form>
+    </div>
+    <!-- Registration form end -->
 
 
     <!-- heading section start -->
@@ -169,8 +150,9 @@
     <!-- products section start -->
      <section class="products">
         <h1 class="title"><span>Our Products</span> <a href="#">view all >></a></h1>
-        <div class="box-container">
-            <div class="box">
+        <div class="box-container" id="product-list">
+            <!-- product-1 -->
+            <div onclick="handleClickBtn(this)" id="product-1" class="box">
                 <div class="icons">
                     <a href="#" class="ri-shopping-cart-line"></a>
                     <a href="#" class="ri-heart-line"></a>
@@ -180,7 +162,7 @@
                     <img src="image/product-1.png" alt="">
                 </div>
                 <div class="content">
-                    <div class="price">$140.00</div>
+                    <div class="price">$ <span>140.00</span></div>
                     <h3>One Seed</h3>
                     <div class="stars">
                        <i class="fas fa-star"></i>
@@ -193,7 +175,8 @@
                 </div>
             </div>
 
-            <div class="box">
+            <!-- product-2 -->
+            <div onclick="handleClickBtn(this)" id="product-2" class="box">
                 <div class="icons">
                     <a href="#" class="ri-shopping-cart-line"></a>
                     <a href="#" class="ri-heart-line"></a>
@@ -203,7 +186,7 @@
                     <img src="image/product-2.png" alt="">
                 </div>
                 <div class="content">
-                    <div class="price">$250.00</div>
+                    <div class="price">$ <span>250.00</span></div>
                     <h3>Attar Fragrance</h3>
                     <div class="stars">
                        <i class="fas fa-star"></i>
@@ -215,8 +198,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="box">
+            <!-- product-3 -->
+            <div onclick="handleClickBtn(this)" id="product-3" class="box">
                 <div class="icons">
                     <a href="#" class="ri-shopping-cart-line"></a>
                     <a href="#" class="ri-heart-line"></a>
@@ -226,7 +209,7 @@
                     <img src="image/product-3.png" alt="">
                 </div>
                 <div class="content">
-                    <div class="price">$140.00</div>
+                    <div class="price">$ <span>140.00</span></div>
                     <h3>Sandalwood Fragrance</h3>
                     <div class="stars">
                        <i class="fas fa-star"></i>
@@ -238,8 +221,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="box">
+            <!-- product-4 -->
+            <div onclick="handleClickBtn(this)" id="product-4" class="box">
                 <div class="icons">
                     <a href="#" class="ri-shopping-cart-line"></a>
                     <a href="#" class="ri-heart-line"></a>
@@ -249,7 +232,7 @@
                     <img src="image/product-4.png" alt="">
                 </div>
                 <div class="content">
-                    <div class="price">$140.00</div>
+                    <div class="price">$ <span>140.00</span></div>
                     <h3>Fruity Fragrance</h3>
                     <div class="stars">
                        <i class="fas fa-star"></i>
@@ -261,8 +244,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="box">
+            <!-- product-5 -->
+            <div onclick="handleClickBtn(this)" id="product-5" class="box">
                 <div class="icons">
                     <a href="#" class="ri-shopping-cart-line"></a>
                     <a href="#" class="ri-heart-line"></a>
@@ -272,7 +255,7 @@
                     <img src="image/product-5.png" alt="">
                 </div>
                 <div class="content">
-                    <div class="price">$160.00</div>
+                    <div class="price">$ <span>160.00</span></div>
                     <h3>Lavender Fragrance</h3>
                     <div class="stars">
                        <i class="fas fa-star"></i>
@@ -284,8 +267,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="box">
+            <!-- product-6 -->
+            <div onclick="handleClickBtn(this)" id="product-6" class="box">
                 <div class="icons">
                     <a href="#" class="ri-shopping-cart-line"></a>
                     <a href="#" class="ri-heart-line"></a>
@@ -295,7 +278,7 @@
                     <img src="image/product-6.png" alt="">
                 </div>
                 <div class="content">
-                    <div class="price">$160.00</div>
+                    <div class="price">$ <span>160.00</span></div>
                     <h3>Rosemary</h3>
                     <div class="stars">
                        <i class="fas fa-star"></i>
@@ -307,8 +290,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="box">
+            <!-- product-7 -->
+            <div onclick="handleClickBtn(this)" id="product-7" class="box">
                 <div class="icons">
                     <a href="#" class="ri-shopping-cart-line"></a>
                     <a href="#" class="ri-heart-line"></a>
@@ -318,7 +301,7 @@
                     <img src="image/product-7.png" alt="">
                 </div>
                 <div class="content">
-                    <div class="price">$100.00</div>
+                    <div class="price">$ <span>100.00</span></div>
                     <h3>Gentle</h3>
                     <div class="stars">
                        <i class="fas fa-star"></i>
@@ -331,8 +314,8 @@
                 </div>
             </div>
 
-
-            <div class="box">
+            <!-- product-8 -->
+            <div onclick="handleClickBtn(this)" id="product-8" class="box">
                 <div class="icons">
                     <a href="#" class="ri-shopping-cart-line"></a>
                     <a href="#" class="ri-heart-line"></a>
@@ -342,7 +325,7 @@
                     <img src="image/product-8.png" alt="">
                 </div>
                 <div class="content">
-                    <div class="price">$140.00</div>
+                    <div class="price">$ <span>140.00</span></div>
                     <h3>Spicy</h3>
                     <div class="stars">
                        <i class="fas fa-star"></i>
@@ -355,8 +338,8 @@
                 </div>
             </div>
 
-
-            <div class="box">
+            <!-- product-9 -->
+            <div onclick="handleClickBtn(this)" id="product-9" class="box">
                 <div class="icons">
                     <a href="#" class="ri-shopping-cart-line"></a>
                     <a href="#" class="ri-heart-line"></a>
@@ -366,7 +349,7 @@
                     <img src="image/product-9.png" alt="">
                 </div>
                 <div class="content">
-                    <div class="price">$140.00</div>
+                    <div class="price">$ <span>140.00</span></div>
                     <h3>Affaction</h3>
                     <div class="stars">
                        <i class="fas fa-star"></i>
@@ -379,8 +362,8 @@
                 </div>
             </div>
 
-
-            <div class="box">
+            <!-- product-10 -->
+            <div onclick="handleClickBtn(this)" id="product-10" class="box">
                 <div class="icons">
                     <a href="#" class="ri-shopping-cart-line"></a>
                     <a href="#" class="ri-heart-line"></a>
@@ -390,7 +373,7 @@
                     <img src="image/product-10.png" alt="">
                 </div>
                 <div class="content">
-                    <div class="price">$210.00</div>
+                    <div class="price">$ <span>210.00</span></div>
                     <h3>Citrusy Fragrances</h3>
                     <div class="stars">
                        <i class="fas fa-star"></i>
@@ -403,7 +386,8 @@
                 </div>
             </div>
 
-            <div class="box">
+            <!-- product-11 -->
+            <div onclick="handleClickBtn(this)" id="product-11" class="box">
                 <div class="icons">
                     <a href="#" class="ri-shopping-cart-line"></a>
                     <a href="#" class="ri-heart-line"></a>
@@ -413,7 +397,7 @@
                     <img src="image/product-11.png" alt="">
                 </div>
                 <div class="content">
-                    <div class="price">$230.00</div>
+                    <div class="price">$ <span>230.00</span></div>
                     <h3>Woody Fragrance</h3>
                     <div class="stars">
                        <i class="fas fa-star"></i>
@@ -484,6 +468,7 @@
 
     <!-- custom js file link  -->
     <script src="js/script.js"></script>
+    <script src="js/shoppingcart.js" async></script>
 
 </body>
 
